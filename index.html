@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tic Tac Toe</h1>
+    </div>
+    <div class="container">
+        <div id="currentPlayerTurn">Player X's Turn</div>
+    </div>
+    <div class="container">
+        <table>
+            <tr>
+                <td><button onclick="makeMove(this)" class="cell"></button></td>
+                <td><button onclick="makeMove(this)" class="cell"></button></td>
+                <td><button onclick="makeMove(this)" class="cell"></button></td>
+            </tr>
+            <tr>
+                <td><button onclick="makeMove(this)" class="cell"></button></td>
+                <td><button onclick="makeMove(this)" class="cell"></button></td>
+                <td><button onclick="makeMove(this)" class="cell"></button></td>
+            </tr>
+            <tr>
+                <td><button onclick="makeMove(this)" class="cell"></button></td>
+                <td><button onclick="makeMove(this)" class="cell"></button></td>
+                <td><button onclick="makeMove(this)" class="cell"></button></td>
+            </tr>
+        </table>
+    </div>
+    <div class="container">
+        <button id="start" onclick="startNewGame()">Start New Game</button>
+    </div>
+    <div class="container">
+        <div id="winMessage"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
