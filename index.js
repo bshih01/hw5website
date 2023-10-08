@@ -7,6 +7,7 @@ function makeMove(button) {
         moveCount++;
         if (checkWin()) {
             $('#winMessage').text(currentPlayer + " wins!").show();
+            $('button.cell').prop('disabled', true);
         } else if (moveCount == 9) {
             $('#winMessage').text("Stalemate! Game over.").show();
         } else {
