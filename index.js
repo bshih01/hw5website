@@ -24,29 +24,29 @@ function checkWin() {
     /* checking for row wins */
     const rows = $('tr');
     for (let i = 0; i < rows.length; i++) {
-        if ($(rows[i]).children().text() === currentPlayer.repeat(3)) {
+        if ($(rows[i]).children().text() == currentPlayer.repeat(3)) {
             return true;
         }
     }
 
     /* checking for column wins */
     for (let i = 1; i <= 3; i++) {
-        if ($(`td:nth-child(${i})`).text() === currentPlayer.repeat(3)) {
+        if ($(`td:nth-child(${i})`).text() == currentPlayer.repeat(3)) {
             return true;
         }
     }
 
     /* checking top left to bottom right diagonal */
-    if ($('tr:nth-child(1) td:nth-child(1)').text() === currentPlayer &&
-        $('tr:nth-child(2) td:nth-child(2)').text() === currentPlayer &&
-        $('tr:nth-child(3) td:nth-child(3)').text() === currentPlayer) {
+    if ($('tr:nth-child(1) td:nth-child(1)').text() == currentPlayer &&
+        $('tr:nth-child(2) td:nth-child(2)').text() == currentPlayer &&
+        $('tr:nth-child(3) td:nth-child(3)').text() == currentPlayer) {
         return true;
     }
 
     /* checking bottom right to top left diagonal */
-    if ($('tr:nth-child(1) td:nth-child(3)').text() === currentPlayer &&
-        $('tr:nth-child(2) td:nth-child(2)').text() === currentPlayer &&
-        $('tr:nth-child(3) td:nth-child(1)').text() === currentPlayer) {
+    if ($('tr:nth-child(1) td:nth-child(3)').text() == currentPlayer &&
+        $('tr:nth-child(2) td:nth-child(2)').text() == currentPlayer &&
+        $('tr:nth-child(3) td:nth-child(1)').text() == currentPlayer) {
         return true;
     }
 
