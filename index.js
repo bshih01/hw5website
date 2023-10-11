@@ -1,9 +1,34 @@
 let currentPlayer = 'X';
 let moveCount = 0;
+let table = [];
 
-function makeMove(button) {
+$(document).ready(() => {
+    /* creating the array representation of table */
+    for (let i = 0; i < 3; i++) {
+        let row = [];
+        for (let j = 0; j < 3; j++) {
+            row.push(0);
+        }
+        table.push(row);
+    }
+    /* creating the tic tac toe grid on the website */
+    let grid = $("#tictactoe");
+    let tableContent = '';
+    for (let i = 0; i < 3; i++) {
+        tableContent += '<tr>';
+        for (let j = 0; j < 3; j++) {
+            tableContent += `<td><button onclick="makeMove(this, ${i}, ${j})" class="cell"></button></td>`;
+        }
+        tableContent += '</tr>';
+    }
+    grid.html(tableContent);
+});
+
+function makeMove(button, row, col) {
+    console.log(table);
     if ($(button).text() === '') {
         $(button).text(currentPlayer);
+        table[row][col] = currentPlayer;
         moveCount++;
         if (checkWin()) {
             $('#winMessage').text(currentPlayer + " wins!").show();
@@ -18,37 +43,27 @@ function makeMove(button) {
     }
 }
 
-
-
-
 function checkWin() {
     /* checking for row wins */
-    const rows = $('tr');
-    for (let i = 0; i < rows.length; i++) {
-        if ($(rows[i]).children().text() == currentPlayer.repeat(3)) {
+    for (let row of table) {
+        if (row && row.every(cell => cell == row[0] && cell != 0)) {
             return true;
         }
     }
 
     /* checking for column wins */
-    for (let i = 1; i <= 3; i++) {
-        if ($(`td:nth-child(${i})`).text() == currentPlayer.repeat(3)) {
+    for (let col = 0; col < table[0].length; col++) {
+        let val = table[0][col];
+        if (table.every(row => row[col] == val && val != 0)) {
             return true;
         }
     }
 
-    /* checking top left to bottom right diagonal */
-    if ($('tr:nth-child(1) td:nth-child(1)').text() == currentPlayer &&
-        $('tr:nth-child(2) td:nth-child(2)').text() == currentPlayer &&
-        $('tr:nth-child(3) td:nth-child(3)').text() == currentPlayer) {
-        return true;
-    }
-
-    /* checking bottom right to top left diagonal */
-    if ($('tr:nth-child(1) td:nth-child(3)').text() == currentPlayer &&
-        $('tr:nth-child(2) td:nth-child(2)').text() == currentPlayer &&
-        $('tr:nth-child(3) td:nth-child(1)').text() == currentPlayer) {
-        return true;
+    /* checking diagonals */
+    if (table[1][1] != 0 && 
+        ((table[0][0] == table[1][1] && table[1][1] == table[2][2]) ||
+         (table[0][2] == table[1][1] && table[1][1] == table[2][0]))) {
+            return true;
     }
 
     return false;
@@ -60,4 +75,5 @@ function startNewGame() {
     $('#currentPlayerTurn').text("Player X's Turn");
     moveCount = 0;
     currentPlayer = 'X';
+    table.forEach(row => row.fill(0));
 }
